@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="300" Width="500">
     <Viewbox>
-        <Grid>
+        <Grid Width="313">
             <TextBox  Height="20" Name="Hour" Width="50" Margin="18,15,210.6,135.4" ></TextBox>
             <TextBox  Height="20" x:Name="Minute" Width="50" Margin="18,47,210.6,103.4" />
             <TextBox  Height="20" x:Name="Second" Width="50" Margin="18,80,210.6,70.4" />
@@ -16,6 +16,16 @@
             <Label x:Name="HourLabel" Content="小时" HorizontalAlignment="Left"  FontSize="8" Margin="88,15,0,0" VerticalAlignment="Top" Height="20"/>
             <Label x:Name="MinuteLabel" Content="分" HorizontalAlignment="Left" FontSize="8" Margin="88,47,0,0" VerticalAlignment="Top" Height="20"/>
             <Label x:Name="SecondLabel" Content="秒" HorizontalAlignment="Left" FontSize="8" Margin="88,80,0,0" VerticalAlignment="Top" Height="20"/>
+
+            <StackPanel HorizontalAlignment="Left" Height="31" Margin="124,10,0,0" VerticalAlignment="Top" Orientation="Horizontal" Width="182">
+                <Label x:Name="HourCount" Content="0" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="30"/>
+                <Label x:Name="label1" Content="时" HorizontalAlignment="Left"   VerticalAlignment="Top" Width="30" />
+                <Label x:Name="MinuteCount" Content="0" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="30"/>
+                <Label x:Name="label3" Content="分" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="30"/>
+                <Label x:Name="SecondCount" Content="0" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="30"/>
+                <Label x:Name="label" Content="秒" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="30"/>
+                
+            </StackPanel>
 
         </Grid>
 

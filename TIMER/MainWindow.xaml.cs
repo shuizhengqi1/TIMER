@@ -13,6 +13,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Threading;
+using System.Timers;
 using System.Text.RegularExpressions;
 
 namespace TIMER
@@ -21,9 +23,9 @@ namespace TIMER
     /// Interaction logic for MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window
-    {
-       
-
+    { private DispatcherTimer Counttime = new DispatcherTimer();
+        private int count = 0;
+        
        
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
@@ -33,7 +35,18 @@ namespace TIMER
             int second = GetValue(Second);
             int time = hour * 3600 + minute * 60 + second;
             Process.Start("shutdown.exe", "-s -t " + time);
+            this.count = time;
+            Counttime.Interval = new TimeSpan(0, 0, 1);
+            Counttime.Tick += new EventHandler(StartCount);
+            Counttime.Start();
          }
+        private void StartCount(object sender, EventArgs e)
+        {
+            this.count -= 1;
+            HourCount.Content = (this.count / 3600).ToString();
+            MinuteCount.Content = ((this.count % 3600)/60).ToString();
+            SecondCount.Content = (this.count % 60).ToString();
+        }
         private int GetValue(TextBox tb)
         {
             String string1 = tb.Text.Trim().ToString();
