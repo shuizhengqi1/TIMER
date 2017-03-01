@@ -1,0 +1,13 @@
+﻿<Window x:Class="TIMER.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TIMER"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="200" Width="300">
+    <Grid>
+        <TextBox  Height="20" Name="Time" Margin="26,55,92.8,74.6" ></TextBox>
+        <Button Content="开始定时任务"  Height="20" Margin="47,102,51.8,27.6" Click="Button_Click_1"/>
+    </Grid>
+</Window>
