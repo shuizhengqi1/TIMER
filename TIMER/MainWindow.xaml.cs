@@ -28,15 +28,30 @@ namespace TIMER
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            String time = Time.Text.Trim().ToString();
+            int hour = GetValue(Hour);
+            int minute = GetValue(Minute);
+            int second = GetValue(Second);
+            int time = hour * 3600 + minute * 60 + second;
+            Process.Start("shutdown.exe", "-s -t " + time);
+         }
+        private int GetValue(TextBox tb)
+        {
+            String string1 = tb.Text.Trim().ToString();
             Regex reg = new Regex("[0-9]");
-            if (reg.IsMatch(time)){
-                Process.Start("shutdown.exe", "-s -t " + time);
+            if (reg.IsMatch(string1) )
+            {
+                return int.Parse(string1);
+            }else if (string1 == "")
+            {
+                return 0;
             }
             else
             {
                 MessageBox.Show("输入不合法，请输入正整数");
+                 return 0;
             }
+            
         }
+       
     }
 }
