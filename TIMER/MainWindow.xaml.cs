@@ -34,11 +34,15 @@ namespace TIMER
             int minute = GetValue(Minute);
             int second = GetValue(Second);
             int time = hour * 3600 + minute * 60 + second;
-            Process.Start("shutdown.exe", "-s -t " + time);
+            String times = time.ToString();
             this.count = time;
             Counttime.Interval = new TimeSpan(0, 0, 1);
             Counttime.Tick += new EventHandler(StartCount);
             Counttime.Start();
+            Process.Start("shutdown.exe", "-a");
+            Process.Start("shutdown.exe", "-s -t " + time);
+            
+            
          }
         private void StartCount(object sender, EventArgs e)
         {
