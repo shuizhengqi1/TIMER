@@ -25,8 +25,13 @@ namespace TIMER
     public partial class MainWindow : Window
     { private DispatcherTimer Counttime = new DispatcherTimer();
         private int count = 0;
+        private Boolean run = true;
         
-       
+       public MainWindow()
+        {
+            Counttime.Interval = new TimeSpan(0, 0, 1);
+            Counttime.Tick += new EventHandler(StartCount);
+        }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
@@ -36,13 +41,16 @@ namespace TIMER
             int time = hour * 3600 + minute * 60 + second;
             String times = time.ToString();
             this.count = time;
-            Counttime.Interval = new TimeSpan(0, 0, 1);
-            Counttime.Tick += new EventHandler(StartCount);
-            Counttime.Start();
-            Process.Start("shutdown.exe", "-a");
-            Process.Start("shutdown.exe", "-s -t " + time);
-            
-            
+            if (Counttime.IsEnabled)
+            {
+                Counttime.Stop();
+            }
+            if (run)
+            {
+                Process.Start("shutdown.exe", "-a");
+                Process.Start("shutdown.exe", "-s -t " + time);
+                Counttime.Start();
+            }
          }
         private void StartCount(object sender, EventArgs e)
         {
@@ -58,17 +66,45 @@ namespace TIMER
             if (reg.IsMatch(string1) )
             {
                 return int.Parse(string1);
+                
             }else if (string1 == "")
             {
                 return 0;
+                
             }
             else
             {
                 MessageBox.Show("输入不合法，请输入正整数");
+                tb.Text = "";
+                run = false;
                  return 0;
             }
             
         }
-       
+
+        private void button_Click(object sender, RoutedEventArgs e)
+        {
+            Process.Start("shutdown.exe", "-a");
+            Counttime.Stop();
+            this.count = 1;
+            StartCount(sender,e);
+        }
+
+        private void Hour_TextInput(object sender, TextCompositionEventArgs e)
+        {
+            TextBox txt = sender as TextBox;
+            Regex reg = new Regex("[0-9]");
+            if (reg.IsMatch(txt.Text))
+            {
+                e.Handled = true;
+            }
+            else
+            {
+                MessageBox.Show("请不要输入非法字符");
+                e.Handled = false;
+                
+
+            }
+        }
     }
 }
